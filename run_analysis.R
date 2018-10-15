@@ -40,9 +40,13 @@ run_analysis <- function() {
 	
 	## STEP 4: Add the descriptive name for the variables
 	
-	f[,2] <- sub("^t","time",f[,2])  			## replace "t" and "f" to something selfexplanatory
-	f[,2] <- sub("^f","frequency",f[,2])
-	
+	f[,2] <- sub("^t","Time",f[,2])  			## replace "t" and "f" to something selfexplanatory
+	f[,2] <- sub("^f","Frequency",f[,2])
+	f[,2] <- gsub("-","",f[,2])
+	f[,2] <- gsub("\\()","",f[,2])
+	f[,2] <- gsub("mean","Mean",f[,2])
+	f[,2] <- gsub("std","Std",f[,2])
+		
 	names(data)[3:length(names(data))] <- f[,2]   ## rename the names of the data set
 	names(data)[1:2] <- c("Subject","Activity")
 	
@@ -51,6 +55,6 @@ run_analysis <- function() {
 	data <- aggregate(data[3:dim(data)[2]], by = list(data$Subject,data$Activity), FUN = function(x) mean(x))
 	names(data)[1:2] <- c("Subject","Activity")
 	
-	write.csv(data, file = "tidydata.csv", row.names=FALSE)
+	write.table(data, file = "tidydata.txt", row.names=FALSE)
 	
 }
