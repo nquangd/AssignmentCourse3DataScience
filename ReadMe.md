@@ -18,5 +18,5 @@ To use this script, run
 
 > run_analysis()  in the R command prompt
 
-this will write a tidy data set named tidydata.csv
+this will write a tidy data set named tidydata.txt
 
